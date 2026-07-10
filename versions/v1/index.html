@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Imperi Charter — Preview web premium</title>
+  <meta name="description" content="Preview visual para una nueva web de Imperi Charter: alquiler de embarcaciones y motos acuáticas en S'Estanyol de Migjorn, Mallorca." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root{
+      --ink:#071823; --ink-2:#123245; --muted:#6f7f88; --line:rgba(7,24,35,.11);
+      --paper:#f7f4ed; --white:#fff; --sea:#0077b6; --sea-2:#00a6c8; --coral:#ff6b4a;
+      --sand:#e9dcc8; --gold:#caa96a; --deep:#061018; --glass:rgba(255,255,255,.68);
+      --shadow:0 24px 80px rgba(5,25,38,.18); --soft:0 10px 35px rgba(5,25,38,.10);
+      --radius:28px; --radius-sm:18px;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    html { scroll-behavior:smooth; }
+    body{ margin:0; font-family:var(--font); color:var(--ink); background:var(--paper); }
+    a{ color:inherit; text-decoration:none; }
+    .nav{ position:fixed; z-index:50; inset:18px 20px auto; max-width:1180px; margin:auto; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:10px 12px 10px 18px; border:1px solid rgba(255,255,255,.35); background:rgba(6,16,24,.54); color:white; border-radius:999px; backdrop-filter: blur(20px) saturate(160%); box-shadow:0 12px 40px rgba(0,0,0,.22); }
+    .brand{ display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.03em; }
+    .brand-mark{ width:34px; height:34px; display:grid; place-items:center; border-radius:50%; background:linear-gradient(135deg,#fff,#aee8f8); color:#073044; font-weight:900; }
+    .nav-links{ display:flex; gap:22px; font-size:13px; color:rgba(255,255,255,.82); }
+    .nav-cta{ padding:12px 18px; border-radius:999px; background:white; color:#061018; font-weight:750; font-size:14px; }
+    .hero{ min-height:100vh; position:relative; display:grid; align-items:end; overflow:hidden; background:var(--deep); color:white; }
+    .hero::before{ content:""; position:absolute; inset:0; background:url('assets/hero.jpg') center/cover no-repeat; transform:scale(1.08); filter:saturate(1.06) contrast(1.02); opacity:.86; }
+    .hero::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(2,9,14,.35),rgba(2,9,14,.22) 35%,rgba(2,9,14,.86) 100%), radial-gradient(circle at 80% 25%,rgba(0,166,200,.34),transparent 35%); }
+    .hero-inner{ position:relative; z-index:1; width:min(1180px, calc(100% - 40px)); margin:0 auto; padding:140px 0 52px; }
+    .eyebrow{ display:inline-flex; align-items:center; gap:10px; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.78); font-weight:800; }
+    .dot{ width:8px; height:8px; border-radius:50%; background:var(--coral); box-shadow:0 0 0 7px rgba(255,107,74,.16); }
+    h1{ margin:18px 0 18px; font-size:clamp(52px,9vw,122px); line-height:.9; letter-spacing:-.085em; max-width:1000px; }
+    .lead{ max-width:640px; color:rgba(255,255,255,.82); font-size:clamp(18px,2.2vw,24px); line-height:1.35; margin:0; letter-spacing:-.025em; }
+    .hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:50px; padding:0 22px; border-radius:999px; font-weight:800; border:1px solid transparent; transition:.2s ease; }
+    .btn.primary{ background:linear-gradient(135deg,var(--coral),#ff9b54); color:white; box-shadow:0 16px 40px rgba(255,107,74,.28); }
+    .btn.secondary{ color:white; border-color:rgba(255,255,255,.35); background:rgba(255,255,255,.10); backdrop-filter:blur(12px); }
+    .hero-panel{ margin-top:58px; display:grid; grid-template-columns:1.1fr .9fr .8fr; gap:12px; }
+    .metric{ padding:18px; border-radius:22px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); backdrop-filter:blur(18px); }
+    .metric b{ display:block; font-size:25px; letter-spacing:-.04em; } .metric span{ color:rgba(255,255,255,.72); font-size:13px; }
+    main{ position:relative; }
+    .section{ width:min(1180px, calc(100% - 40px)); margin:0 auto; padding:88px 0; }
+    .section-head{ display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:28px; }
+    h2{ margin:0; font-size:clamp(34px,5vw,64px); line-height:.96; letter-spacing:-.065em; max-width:720px; }
+    .kicker{ color:var(--sea); font-weight:900; text-transform:uppercase; letter-spacing:.14em; font-size:12px; margin-bottom:12px; }
+    .section-head p{ max-width:420px; color:var(--muted); line-height:1.55; margin:0; }
+    .fleet-grid{ display:grid; grid-template-columns:1.25fr .85fr .85fr; gap:18px; }
+    .card{ border-radius:var(--radius); background:var(--white); box-shadow:var(--soft); overflow:hidden; border:1px solid rgba(7,24,35,.06); }
+    .fleet-main{ min-height:520px; position:relative; color:white; display:flex; align-items:flex-end; }
+    .fleet-main::before{ content:""; position:absolute; inset:0; background:url('assets/fleet.jpg') center/cover no-repeat; }
+    .fleet-main::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent,rgba(3,13,20,.88)); }
+    .fleet-copy{ position:relative; z-index:1; padding:34px; }
+    .pill{ display:inline-flex; padding:8px 12px; border-radius:999px; font-size:12px; font-weight:850; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); backdrop-filter:blur(8px); }
+    .fleet-copy h3, .experience h3{ margin:15px 0 8px; font-size:34px; line-height:1; letter-spacing:-.05em; }
+    .fleet-copy p{ color:rgba(255,255,255,.77); line-height:1.5; max-width:460px; }
+    .mini{ padding:22px; display:flex; flex-direction:column; min-height:252px; }
+    .mini .icon{ width:48px; height:48px; display:grid; place-items:center; border-radius:16px; background:#eef8fb; color:var(--sea); font-size:22px; }
+    .mini h3{ margin:20px 0 8px; font-size:23px; letter-spacing:-.035em; } .mini p{ margin:0; color:var(--muted); line-height:1.45; }
+    .booking-strip{ display:grid; grid-template-columns:1fr 1.05fr; gap:18px; align-items:stretch; }
+    .booking-copy{ padding:38px; background:linear-gradient(135deg,#071823,#0b405c 58%,#0077b6); color:white; border-radius:var(--radius); box-shadow:var(--shadow); position:relative; overflow:hidden; }
+    .booking-copy::after{ content:""; position:absolute; width:360px; height:360px; right:-140px; top:-150px; border-radius:50%; background:rgba(0,166,200,.35); filter:blur(10px); }
+    .booking-copy h2{ position:relative; z-index:1; } .booking-copy p{ position:relative; z-index:1; color:rgba(255,255,255,.76); font-size:18px; line-height:1.55; max-width:560px; }
+    .booking-widget{ background:white; border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); }
+    .widget-title{ display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+    .widget-title b{ font-size:22px; letter-spacing:-.04em; } .badge{ color:#0c6; font-weight:900; font-size:12px; background:#eafbf2; padding:8px 10px; border-radius:999px; }
+    .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .field{ border:1px solid var(--line); border-radius:18px; padding:14px 15px; background:#fbfbf9; }
+    .field small{ display:block; color:var(--muted); font-weight:750; font-size:11px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:5px; }
+    .field strong{ font-size:16px; }
+    .full{ grid-column:1/-1; }
+    .trust{ display:grid; grid-template-columns:.9fr 1.1fr; gap:18px; }
+    .review-score{ padding:38px; border-radius:var(--radius); background:white; box-shadow:var(--soft); }
+    .score{ font-size:92px; line-height:.9; letter-spacing:-.08em; font-weight:900; background:linear-gradient(135deg,var(--sea),var(--sea-2)); -webkit-background-clip:text; color:transparent; }
+    .stars{ color:#ffb703; font-size:28px; letter-spacing:2px; margin:10px 0; }
+    .review-card{ padding:28px; border-radius:var(--radius); background:#071823; color:white; display:flex; flex-direction:column; justify-content:space-between; min-height:220px; }
+    .quote{ font-size:22px; line-height:1.25; letter-spacing:-.035em; margin:0; color:rgba(255,255,255,.9); }
+    .author{ color:rgba(255,255,255,.62); margin-top:20px; font-weight:700; }
+    .experiences{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .experience{ min-height:410px; padding:26px; display:flex; flex-direction:column; justify-content:flex-end; color:white; position:relative; overflow:hidden; }
+    .experience::before{ content:""; position:absolute; inset:0; background:var(--img) center/cover no-repeat; transition:.35s ease; }
+    .experience::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.76)); }
+    .experience > *{ position:relative; z-index:1; } .experience p{ color:rgba(255,255,255,.78); line-height:1.45; }
+    .contact{ background:#061018; color:white; border-radius:38px; overflow:hidden; display:grid; grid-template-columns:1fr .9fr; min-height:500px; }
+    .contact-img{ background:url('assets/contact.jpg') center/cover no-repeat; min-height:360px; }
+    .contact-copy{ padding:46px; align-self:center; }
+    .contact-copy p{ color:rgba(255,255,255,.72); font-size:18px; line-height:1.55; }
+    .contact-list{ display:grid; gap:10px; margin:24px 0; }
+    .contact-row{ display:flex; gap:12px; align-items:center; padding:13px 14px; border-radius:18px; background:rgba(255,255,255,.08); color:rgba(255,255,255,.88); }
+    footer{ text-align:center; color:var(--muted); padding:36px 20px 54px; font-size:13px; }
+    .note{ margin-top:16px; font-size:12px; color:rgba(255,255,255,.56); }
+    @media (max-width: 860px){
+      .nav{ inset:10px 10px auto; } .nav-links{ display:none; } .nav-cta{ padding:10px 14px; }
+      .hero-inner,.section{ width:min(100% - 28px, 1180px); } h1{ font-size:clamp(48px,16vw,86px); }
+      .hero-panel,.fleet-grid,.booking-strip,.trust,.experiences,.contact{ grid-template-columns:1fr; }
+      .fleet-main{ min-height:430px; } .section{ padding:62px 0; } .section-head{ display:block; } .section-head p{ margin-top:14px; }
+      .form-grid{ grid-template-columns:1fr; } .contact-copy{ padding:28px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Principal">
+    <a class="brand" href="#top"><span class="brand-mark">IC</span><span>Imperi Charter</span></a>
+    <div class="nav-links"><a href="#flota">Flota</a><a href="#reservas">Reservas</a><a href="#opiniones">Opiniones</a><a href="#contacto">Contacto</a></div>
+    <a class="nav-cta" href="https://wa.me/34635012331">Pedir disponibilidad</a>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <span class="eyebrow"><span class="dot"></span> S'Estanyol · Mallorca</span>
+      <h1>El sur de Mallorca empieza en el agua.</h1>
+      <p class="lead">Alquiler de embarcaciones y motos acuáticas con trato cercano, barcos cuidados y una experiencia preparada para reservar online.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#reservas">Ver disponibilidad futura →</a>
+        <a class="btn secondary" href="#flota">Explorar embarcaciones</a>
+      </div>
+      <div class="hero-panel" aria-label="Datos destacados">
+        <div class="metric"><b>5,0 ★</b><span>Valoración visible en Google Maps</span></div>
+        <div class="metric"><b>09:00–19:00</b><span>Horario confirmado recientemente</span></div>
+        <div class="metric"><b>Club Náutico</b><span>S'Estanyol de Migjorn</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="flota">
+      <div class="section-head">
+        <div><div class="kicker">Flota y experiencias</div><h2>Diseñada para elegir rápido y reservar sin fricción.</h2></div>
+        <p>Una estructura visual pensada para enseñar barcos, requisitos de licencia, capacidad, horarios y precio de forma clara.</p>
+      </div>
+      <div class="fleet-grid">
+        <article class="card fleet-main">
+          <div class="fleet-copy"><span class="pill">Embarcaciones con y sin licencia</span><h3>Tu barco para un día perfecto</h3><p>Ficha visual para cada embarcación: fotos, equipamiento, capacidad, zona recomendada, depósito y llamada a reservar.</p></div>
+        </article>
+        <article class="card mini"><span class="icon">⚓</span><h3>Salida sencilla</h3><p>Ubicación clara, indicaciones de llegada y explicación previa para navegar con seguridad.</p></article>
+        <article class="card mini"><span class="icon">🌊</span><h3>Experiencias</h3><p>Rutas a calas, motos acuáticas, atardecer y packs para familias o grupos.</p></article>
+        <article class="card mini"><span class="icon">✓</span><h3>Confianza</h3><p>Barcas cuidadas, trato cercano y opiniones visibles desde el primer scroll.</p></article>
+        <article class="card mini"><span class="icon">↗</span><h3>Futuro booking</h3><p>Preparada para integrar calendario, pagos, fianzas y automatización de reservas.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="reservas">
+      <div class="booking-strip">
+        <div class="booking-copy"><div class="kicker" style="color:#8ee8ff">Reservas</div><h2>Una web bonita hoy. Un motor de reservas mañana.</h2><p>El prototipo ya enseña cómo se sentiría la reserva: fechas, tipo de embarcación, duración y contacto inmediato por WhatsApp mientras llega el sistema completo.</p><p class="note">Preview: el formulario es visual, no envía datos todavía.</p></div>
+        <aside class="booking-widget" aria-label="Mockup de reserva">
+          <div class="widget-title"><b>Planifica tu salida</b><span class="badge">Próximamente</span></div>
+          <div class="form-grid">
+            <div class="field"><small>Fecha</small><strong>Elige día</strong></div>
+            <div class="field"><small>Duración</small><strong>4 h / día completo</strong></div>
+            <div class="field full"><small>Experiencia</small><strong>Barca sin licencia · Barca con licencia · Moto acuática</strong></div>
+            <div class="field"><small>Personas</small><strong>2–8</strong></div>
+            <div class="field"><small>Salida</small><strong>S'Estanyol</strong></div>
+            <a class="btn primary full" href="https://wa.me/34635012331">Solicitar disponibilidad por WhatsApp</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="opiniones">
+      <div class="section-head">
+        <div><div class="kicker">Prueba social</div><h2>Las opiniones deben vender antes que el texto.</h2></div>
+        <p>Google Maps muestra una valoración de 5,0. En vista limitada no expone el recuento completo; dejamos el bloque listo para conectar reseñas reales por API o widget autorizado.</p>
+      </div>
+      <div class="trust">
+        <div class="review-score"><div class="score">5,0</div><div class="stars">★★★★★</div><p><strong>Google Maps:</strong> valoración visible de Imperi Charter como servicio de alquiler de embarcaciones.</p><p style="color:var(--muted);line-height:1.5">Dirección visible: Via del mediterranero, S/N, 07639 S'Estanyol de Migjorn, Illes Balears.</p></div>
+        <div style="display:grid; gap:18px;">
+          <article class="review-card"><p class="quote">“Muy amigable, extremadamente servicial, flexible, buena instrucción, competente… Genial, no podría ser mejor.”</p><div class="author">Wolfgang · reseña pública localizada</div></article>
+          <article class="review-card" style="background:#fff;color:var(--ink);"><p class="quote" style="color:var(--ink)">“Como cada año un diez de empresa, el trato espectacular y la barca impecable.”</p><div class="author" style="color:var(--muted)">Maria · reseña pública localizada</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><div><div class="kicker">Contenido comercial</div><h2>Tres puertas de entrada para distintos clientes.</h2></div></div>
+      <div class="experiences">
+        <article class="card experience" style="--img:url('assets/about.jpg')"><span class="pill">Familias</span><h3>Día de calas</h3><p>Ruta clara, equipamiento y recomendaciones para disfrutar sin complicarse.</p></article>
+        <article class="card experience" style="--img:url('assets/booking.jpg')"><span class="pill">Grupos</span><h3>Velocidad y mar</h3><p>Motos acuáticas y experiencias con energía, fotos y reserva rápida.</p></article>
+        <article class="card experience" style="--img:url('assets/fleet.jpg')"><span class="pill">Parejas</span><h3>Atardecer</h3><p>Producto aspiracional para vender momentos, no solo embarcaciones.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="contact">
+        <div class="contact-copy"><div class="kicker" style="color:#8ee8ff">Contacto</div><h2>Reserva directa, trato humano.</h2><p>La web final puede mantener el contacto inmediato por WhatsApp y añadir reservas online cuando el negocio lo decida.</p><div class="contact-list"><a class="contact-row" href="tel:+34635012331">☎ +34 635 01 23 31</a><a class="contact-row" href="tel:+34636700630">☎ +34 636 70 06 30</a><a class="contact-row" href="mailto:reservas@impericharter.com">✉ reservas@impericharter.com</a><span class="contact-row">📍 Club Náutico s'Estanyol</span></div><a class="btn primary" href="https://wa.me/34635012331">Abrir WhatsApp</a></div>
+        <div class="contact-img" aria-hidden="true"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Preview independiente para Imperi Charter · carpeta nueva · sin tocar otorrinomaresme.com · listo para convertir en repo/Firebase separado.</footer>
+</body>
+</html>
